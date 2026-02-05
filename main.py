@@ -8,6 +8,14 @@ def main():
     #Bez pygame.init() Pygame nie działa poprawnie.
     #To jest start całej biblioteki.
     pygame.init() 
+
+    clock = pygame.time.Clock() #Ustawia zegar do kontrolowania klatek na sekundę
+    dt = 0 #Delta time - czas między klatkami
+    
+    
+
+
+
     #Tworzy GUI window d;a gry
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     #Game loop
@@ -23,7 +31,8 @@ def main():
         screen.fill("black")
         # method to refresh the screen.
         pygame.display.flip() 
-    
+        dt = clock.tick(60) / 1000 #Ogranicza do 60 klatek na sekundę
+
 
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
