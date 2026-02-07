@@ -2,6 +2,8 @@ import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, LINE_WIDTH
 from logger import log_state
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -13,7 +15,11 @@ def main():
     #Tworzy grupy sprite'ów do aktualizacji i rysowania
     updatable = pygame.sprite.Group()
     drawable  = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable,)
+    asteroid_field = AsteroidField()
 
     
 
@@ -39,8 +45,7 @@ def main():
                 return
             
         dt = clock.tick(60) / 1000 #Ogranicza do 60 klatek na sekundę
-        updatable.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
-
+        
     
     
 
