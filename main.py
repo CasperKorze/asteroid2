@@ -1,6 +1,7 @@
 import pygame
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, LINE_WIDTH
 from logger import log_state
+from player import Player
 
 
 def main():
@@ -12,7 +13,7 @@ def main():
     clock = pygame.time.Clock() #Ustawia zegar do kontrolowania klatek na sekundę
     dt = 0 #Delta time - czas między klatkami
     
-    
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) #Tworzy gracza na środku ekranu
 
 
 
@@ -27,11 +28,19 @@ def main():
             #Zamyka okno gry po kliknięciu na krzyżyk
             if event.type == pygame.QUIT:
                 return
+            
+    
+    
+
+
         #Tworzy czarny ekran na tyle
         screen.fill("black")
         # method to refresh the screen.
+        player.draw(screen) #Rysuje gracza na ekranie
         pygame.display.flip() 
         dt = clock.tick(60) / 1000 #Ogranicza do 60 klatek na sekundę
+
+    
 
 
 
