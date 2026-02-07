@@ -15,10 +15,12 @@ def main():
     #Tworzy grupy sprite'ów do aktualizacji i rysowania
     updatable = pygame.sprite.Group()
     drawable  = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+
+    asteroids = pygame.sprite.Group()
+
     Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = (updatable,)
+    AsteroidField.containers = updatable
     asteroid_field = AsteroidField()
 
     
@@ -45,7 +47,8 @@ def main():
                 return
             
         dt = clock.tick(60) / 1000 #Ogranicza do 60 klatek na sekundę
-        
+        updatable.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
+
     
     
 
