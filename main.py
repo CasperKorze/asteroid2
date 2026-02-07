@@ -10,11 +10,19 @@ def main():
     #To jest start całej biblioteki.
     pygame.init() 
 
+    #Tworzy grupy sprite'ów do aktualizacji i rysowania
+    updatable = pygame.sprite.Group()
+    drawable  = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
+    
+
+
     clock = pygame.time.Clock() #Ustawia zegar do kontrolowania klatek na sekundę
     dt = 0 #Delta time - czas między klatkami
     
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) #Tworzy gracza na środku ekranu
-    player.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
+    updatable.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
 
 
 
@@ -31,16 +39,19 @@ def main():
                 return
             
         dt = clock.tick(60) / 1000 #Ogranicza do 60 klatek na sekundę
-        player.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
+        updatable.update(dt) #Aktualizuje gracza (np. jego pozycję, rotację itp.) na podstawie delta time
 
     
     
 
 
-            #Tworzy czarny ekran na tyle
+        #Tworzy czarny ekran na tyle
         screen.fill("black")
-            # method to refresh the screen.
+        # method to refresh the screen.
         player.draw(screen) #Rysuje gracza na ekranie
+
+        for obj in drawable:
+            obj.draw(screen)
             
         pygame.display.flip() 
     
